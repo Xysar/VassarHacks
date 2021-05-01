@@ -36,9 +36,6 @@ public class Whiteboard {
         this.board.getContentPane().add(this.draw);
     }
 
-    public int getColor(){
-        return color;
-    }
 
     public static void main(String[] args){
         new Whiteboard();

@@ -5,7 +5,8 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 public class Drawboard extends JPanel implements MouseListener, MouseMotionListener {
-int color;
+    int color;
+
    public void setColor(int color){
        this.color = color;
     }
