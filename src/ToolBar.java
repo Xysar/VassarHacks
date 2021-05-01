@@ -30,6 +30,8 @@ public class ToolBar extends JPanel{
     public ToolBar() {
         listener = new ClickListener();
 
+        colorNames = new String[] {"Red", "Green", "Blue", "Black"};
+
         //component initializations
         pencilB = new JButton("Pencil");
         sizeP = new JPanel();
