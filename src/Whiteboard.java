@@ -8,7 +8,8 @@ public class Whiteboard {
     JButton pencilB;
     Border loweredetched;
     Drawboard draw;
-    public final int boardSize = 600;
+    int color;
+    int boardSize = 600;
 
     public Whiteboard(){
         this.toolP = new ToolBar();
@@ -34,6 +35,11 @@ public class Whiteboard {
         this.draw.setBounds(230, 10,boardSize,boardSize);
         this.board.getContentPane().add(this.draw);
     }
+
+    public int getColor(){
+        return color;
+    }
+
     public static void main(String[] args){
         new Whiteboard();
     }
