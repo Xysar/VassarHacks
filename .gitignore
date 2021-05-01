@@ -21,6 +21,7 @@
 
 
 # User-specific stuff
+idea/
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/**/usage.statistics.xml
@@ -31,6 +32,7 @@
 .idea/**/contentModel.xml
 
 # Sensitive or high-churn files
+
 .idea/**/dataSources/
 .idea/**/dataSources.ids
 .idea/**/dataSources.local.xml
