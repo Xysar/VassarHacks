@@ -7,11 +7,14 @@ public class Whiteboard {
     JPanel toolP;
     JButton pencilB;
     Border loweredetched;
+    Drawboard draw;
+    public final int boardSize = 600;
 
     public Whiteboard(){
         this.toolP = new JPanel();
         this.loweredetched = BorderFactory.createEtchedBorder(1);
         this.pencilB = new JButton("Pencil");
+        this.draw = new Drawboard();
 
         this.initialize();
     }
@@ -31,7 +34,8 @@ public class Whiteboard {
         this.toolP.setBounds(10, 10, 200, 600);
         this.pencilB.setBounds(40,50,120,25);
         this.board.setVisible(true);
-
+        this.draw.setBounds(230, 10,boardSize,boardSize);
+        this.board.getContentPane().add(this.draw);
     }
     public static void main(String[] args){
         new Whiteboard();
