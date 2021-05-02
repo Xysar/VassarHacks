@@ -62,6 +62,9 @@ public class Whiteboard {
         System.out.println("Cleared!");
     }
 
+    public void capImg() {
+        draw.capImg();
+    }
 
     public static void main(String[] args){
         new Whiteboard();

@@ -23,6 +23,7 @@ public class ToolBar extends JPanel{
     private JButton lineB;
     private JButton clearB;
     private JButton enterB;
+    private JButton save;
 
     private int penSize;
     private ClickListener listener;
@@ -30,7 +31,7 @@ public class ToolBar extends JPanel{
     private int color = 1;
     //for tracking which buttons to gray out
     private JButton toolB;
-    private JButton drawStyleB;
+//    private JButton drawStyleB;
     private String text;
     private Whiteboard whiteboard;
 
@@ -51,10 +52,11 @@ public class ToolBar extends JPanel{
         sizeUp = new JButton("+");
         eraserB = new JButton("Eraser");
         colorBox = new JComboBox<>(colorNames);
-        freeDrawB = new JButton("Free Draw");
-        lineB = new JButton("Line");
+//        freeDrawB = new JButton("Free Draw");
+//        lineB = new JButton("Line");
         clearB = new JButton("Clear");
         jTextArea = new JTextArea(10,10);
+        save = new JButton("Save as .jpg");
 
         text = "";
 
@@ -89,11 +91,11 @@ public class ToolBar extends JPanel{
         colorBox.addActionListener(listener);
         colorBox.setActionCommand("colorSelected");
 
-        freeDrawB.setBounds(40, 240, 120, 25);
-        lineB.setBounds(40, 270, 120, 25);
-        freeDrawB.addActionListener(listener);
-        lineB.addActionListener(listener);
-        freeDrawB.setEnabled(false);
+//        freeDrawB.setBounds(40, 240, 120, 25);
+//        lineB.setBounds(40, 270, 120, 25);
+//        freeDrawB.addActionListener(listener);
+//        lineB.addActionListener(listener);
+//        freeDrawB.setEnabled(false);
 
         jTextArea.setBounds(40, 400, 120, 100);
         enterB.setBounds(40,500,120,25);
@@ -101,6 +103,10 @@ public class ToolBar extends JPanel{
 
         clearB.setBounds(40, 320, 120, 25);
         clearB.addActionListener(listener);
+
+        save.setBounds(40,550, 120, 25);
+        save.addActionListener(listener);
+        save.setActionCommand("Save");
 
         //adding components
         this.add(pencilB);
@@ -112,9 +118,10 @@ public class ToolBar extends JPanel{
         this.add(clearB);
         this.add(jTextArea);
         this.add(enterB);
+        this.add(save);
 
         toolB = pencilB;
-        drawStyleB = freeDrawB;
+//        drawStyleB = freeDrawB;
     }
 
     public void setTool(int tool) {
@@ -236,7 +243,8 @@ public class ToolBar extends JPanel{
                 text = jTextArea.getText();
                 whiteboard.setText(text);
                 System.out.println("text set to: " + text);
-            }
+            } else if (e.getActionCommand().equals("Save"))
+                whiteboard.capImg();
         }
     }
 }

@@ -1,8 +1,12 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Drawboard extends JPanel implements MouseListener, MouseMotionListener {
@@ -13,7 +17,7 @@ public class Drawboard extends JPanel implements MouseListener, MouseMotionListe
     int pastY = -1;
     String text;
 
-    int pWidth = 50;
+    int pWidth = 100;
     int pixel[][] = new int[pWidth][pWidth];
 
     public void setSize(int size){
@@ -38,6 +42,20 @@ public class Drawboard extends JPanel implements MouseListener, MouseMotionListe
         for(int i = 0; i<pWidth;i++)
             for(int j = 0; j<pWidth;j++)
                 pixel[i][j] = 0;
+    }
+
+    public void capImg() {
+        BufferedImage image = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
+        Graphics2D g = image.createGraphics();
+        this.printAll(g);
+        g.dispose();
+        try {
+            String home = System.getProperty("user.home");
+            File file = new File(home + File.separator + "Downloads" + File.separator + "painting.jpg");
+            ImageIO.write(image, "jpg", file);
+        } catch (IOException exp) {
+            exp.printStackTrace();
+        }
     }
 
     public void paintComponent(Graphics g) {
