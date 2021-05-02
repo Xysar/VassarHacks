@@ -35,12 +35,26 @@ public class Whiteboard {
         this.board.setVisible(true);
         this.draw.setBounds(230, 10, boardSize, boardSize);
         this.board.getContentPane().add(this.draw);
+
+        this.draw.setMode(this.toolP.getMode());
+        this.draw.setSize(this.toolP.getPenSize());
+        this.draw.setText(this.toolP.getText());
         while (true) {
             draw.repaint();
-            this.draw.setMode(this.toolP.getMode());
-            this.draw.setSize(this.toolP.getPenSize());
-            this.draw.setText(this.toolP.getText());
         }
+
+    }
+
+    public void setMode(int mode) {
+        this.draw.setMode(mode);
+    }
+
+    public void setSize(int size) {
+        this.draw.setSize(size);
+    }
+
+    public void setText(String text) {
+        this.draw.setText(text);
     }
 
     public void clear() {

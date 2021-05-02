@@ -123,6 +123,7 @@ public class ToolBar extends JPanel{
             toolB = pencilB;
             toolB.setEnabled(false);
             mode = color;
+            whiteboard.setMode(mode);
             System.out.println("Using the pencil");
         }
         else if (tool == ERASER) {
@@ -130,6 +131,7 @@ public class ToolBar extends JPanel{
             toolB = eraserB;
             toolB.setEnabled(false);
             mode = 0;
+            whiteboard.setMode(mode);
             System.out.println("Using the eraser");
         }
     }
@@ -141,6 +143,7 @@ public class ToolBar extends JPanel{
             size.setText((Integer.parseInt(size.getText()) - 1) + "");
             System.out.println("Size decreased");
             penSize--;
+            whiteboard.setSize(penSize);
         }
     }
 
@@ -151,6 +154,7 @@ public class ToolBar extends JPanel{
             size.setText((Integer.parseInt(size.getText()) + 1) + "");
             System.out.println("Size increased" + size.getText());
             penSize++;
+            whiteboard.setSize(penSize);
         }
     }
     public int getPenSize(){
@@ -179,6 +183,7 @@ public class ToolBar extends JPanel{
             color = 3;
         else if (outC.equals("blue"))
             color = 4;
+        whiteboard.setMode(mode);
     }
 
     //method to handle setting draw method
@@ -229,7 +234,8 @@ public class ToolBar extends JPanel{
                 whiteboard.clear();
             else if(e.getActionCommand().equals("Enter")){
                 text = jTextArea.getText();
-                System.out.println("test");
+                whiteboard.setText(text);
+                System.out.println("text set to: " + text);
             }
         }
     }
