@@ -13,8 +13,8 @@ public class Drawboard extends JPanel implements MouseListener, MouseMotionListe
     int pastY = -1;
     String text;
 
-    int pixel[][] = new int[100][100];
-    int pWidth = 100;
+    int pWidth = 50;
+    int pixel[][] = new int[pWidth][pWidth];
 
     public void setSize(int size){
         this.size = size;
@@ -27,16 +27,16 @@ public class Drawboard extends JPanel implements MouseListener, MouseMotionListe
         this.text = text;
     }
     public Drawboard() {
-        for(int i = 0; i<100;i++)
-            for(int j = 0; j<100;j++)
+        for(int i = 0; i<pWidth;i++)
+            for(int j = 0; j<pWidth;j++)
                 pixel[i][j] = 0;
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
     }
 
     public void clear() {
-        for(int i = 0; i<100;i++)
-            for(int j = 0; j<100;j++)
+        for(int i = 0; i<pWidth;i++)
+            for(int j = 0; j<pWidth;j++)
                 pixel[i][j] = 0;
     }
 
@@ -45,34 +45,34 @@ public class Drawboard extends JPanel implements MouseListener, MouseMotionListe
             g.setColor(Color.WHITE);
             g.fillRect(0, 0, 600, 600);
             g.drawRect(0, 0, 600, 600);
-
-       for(int i = 0;i<100;i++){
-           for(int j  = 0;j<100;j++){
+        int scale = 600/pWidth;
+       for(int i = 0;i<pWidth;i++){
+           for(int j  = 0;j<pWidth;j++){
                switch(pixel[i][j]){
                    case 0:
                        g.setColor(Color.WHITE);
-                       g.drawRect(i*6,j*6,6, 6);
-                       g.fillRect(i*6, j*6,6, 6);
+                       g.drawRect(i*scale,j*scale, scale, scale);
+                       g.fillRect(i*scale, j*scale, scale, scale);
                        break;
                    case 1:
                        g.setColor(Color.BLACK);
-                       g.drawRect(i*6,j*6,6, 6);
-                       g.fillRect(i*6, j*6,6, 6);
+                       g.drawRect(i*scale,j*scale,scale, scale);
+                       g.fillRect(i*scale, j*scale,scale, scale);
                        break;
                    case 2:
                        g.setColor(Color.RED);
-                       g.drawRect(i*6,j*6,6, 6);
-                       g.fillRect(i*6, j*6,6, 6);
+                       g.drawRect(i*scale,j*scale,scale, scale);
+                       g.fillRect(i*scale, j*scale,scale, scale);
                        break;
                    case 3:
                        g.setColor(Color.GREEN);
-                       g.drawRect(i*6,j*6,6, 6);
-                       g.fillRect(i*6, j*6,6, 6);
+                       g.drawRect(i*scale,j*scale,scale, scale);
+                       g.fillRect(i*scale, j*scale,scale, scale);
                        break;
                    case 4:
                        g.setColor(Color.BLUE);
-                       g.drawRect(i*6,j*6,6, 6);
-                       g.fillRect(i*6, j*6,6, 6);
+                       g.drawRect(i*scale,j*scale,scale, scale);
+                       g.fillRect(i*scale, j*scale,scale, scale);
                        break;
 
                }
@@ -85,8 +85,8 @@ public class Drawboard extends JPanel implements MouseListener, MouseMotionListe
     }
 
     public void mouseDragged(MouseEvent e) {
-        int mouseX = e.getX() / 6;
-        int mouseY = e.getY() / 6;
+        int mouseX = e.getX() / (600/pWidth);
+        int mouseY = e.getY() / (600/pWidth);
         int m = mode;
         if (this.size % 2 == 1) {
             for (int i = mouseX - ((size - 1) / 2); i <= mouseX + ((size - 1) / 2); i++) {
@@ -111,8 +111,8 @@ public class Drawboard extends JPanel implements MouseListener, MouseMotionListe
     }
 
     public void mouseClicked(MouseEvent e) {
-        int mouseX = e.getX()/6;
-        int mouseY = e.getY()/6;
+        int mouseX = e.getX()/(600/pWidth);
+        int mouseY = e.getY()/(600/pWidth);
         int m = mode;
         if (this.size % 2 == 1) {
             for (int i = mouseX - ((size - 1) / 2); i <= mouseX + ((size - 1) / 2); i++) {
