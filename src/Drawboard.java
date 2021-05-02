@@ -12,6 +12,7 @@ public class Drawboard extends JPanel implements MouseListener, MouseMotionListe
     int pastX = -1;
     int pastY = -1;
     String text;
+    boolean trace = false;
 
     int pixel[][] = new int[100][100];
     int pWidth = 100;
@@ -74,17 +75,16 @@ public class Drawboard extends JPanel implements MouseListener, MouseMotionListe
                        g.drawRect(i*6,j*6,6, 6);
                        g.fillRect(i*6, j*6,6, 6);
                        break;
-
                }
 
                g.setColor(Color.BLACK);
                g.drawString(text,250,300);
            }
        }
-
     }
 
     public void mouseDragged(MouseEvent e) {
+        trace = true;
         int mouseX = e.getX() / 6;
         int mouseY = e.getY() / 6;
         int m = mode;
@@ -101,6 +101,7 @@ public class Drawboard extends JPanel implements MouseListener, MouseMotionListe
                 }
             }
         }
+
     }
 
     public void mouseMoved(MouseEvent e) {
@@ -134,7 +135,5 @@ public class Drawboard extends JPanel implements MouseListener, MouseMotionListe
     public void mousePressed(MouseEvent e) {
     }
     public void mouseReleased(MouseEvent e) {
-        pastX = -1;
-        pastY = -1;
     }
 }
