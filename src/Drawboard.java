@@ -51,7 +51,11 @@ public class Drawboard extends JPanel implements MouseListener, MouseMotionListe
         g.dispose();
         try {
             String home = System.getProperty("user.home");
-            File file = new File(home + File.separator + "Downloads" + File.separator + "painting.jpg");
+            String filePath = home + File.separator + "Downloads" + File.separator + "painting";
+            File file = new File(filePath + ".jpg");
+            for (int i = 1; file.exists(); i++) {
+                file = new File(filePath + i + ".jpg");
+            }
             ImageIO.write(image, "jpg", file);
         } catch (IOException exp) {
             exp.printStackTrace();
