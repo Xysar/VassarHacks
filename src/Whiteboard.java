@@ -33,9 +33,12 @@ public class Whiteboard {
         this.board.setVisible(true);
         this.draw.setBounds(230, 10, boardSize, boardSize);
         this.board.getContentPane().add(this.draw);
-        this.draw.setSize(this.toolP.getPenSize());
-        while (true)
+
+        while (true) {
             draw.repaint();
+            this.draw.setMode(this.toolP.getMode());
+            this.draw.setSize(this.toolP.getPenSize());
+        }
     }
 
 
