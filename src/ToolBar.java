@@ -23,7 +23,7 @@ public class ToolBar extends JPanel{
     private JButton lineB;
     private int penSize;
     private ClickListener listener;
-
+    private int mode = 1;
     //for tracking which buttons to gray out
     private JButton toolB;
     private JButton drawStyleB;
@@ -45,8 +45,6 @@ public class ToolBar extends JPanel{
         colorBox = new JComboBox<>(colorNames);
         freeDrawB = new JButton("Free Draw");
         lineB = new JButton("Line");
-
-
 
         //panel setup
         this.setLayout(null);
@@ -115,11 +113,13 @@ public class ToolBar extends JPanel{
     public void decreaseSize() {
         size.setText((Integer.parseInt(size.getText()) - 1) + "");
         System.out.println("Size decreased");
+        penSize--;
     }
 
     public void increaseSize() {
         size.setText((Integer.parseInt(size.getText()) + 1) + "");
-        System.out.println("Size increased");
+        System.out.println("Size increased" + size.getText());
+        penSize++;
     }
     public int getPenSize(){
         return penSize;
@@ -127,7 +127,16 @@ public class ToolBar extends JPanel{
 
     //method to handle a new color selection
     public void setColor() {
+        String outC = ((String) colorBox.getSelectedItem()).toLowerCase();
         System.out.println("Using " + ((String) colorBox.getSelectedItem()).toLowerCase());
+        if(outC.equals("red")){
+            mode = 2;
+        }else if(outC.equals("black"))
+            mode = 0;
+        else if (outC.equals("green"))
+            mode = 3;
+        else if(outC.equals("blue"))
+            mode = 4;
     }
 
     //method to handle setting draw method
@@ -146,20 +155,25 @@ public class ToolBar extends JPanel{
         }
     }
 
+    public int getMode(){
+        return mode;
+    }
     private class ClickListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (e.getActionCommand().equals("Pencil"))
+            if (e.getActionCommand().equals("Pencil")) {
                 setTool(PENCIL);
-            else if (e.getActionCommand().equals("Eraser"))
+                mode = 1;
+            }else if (e.getActionCommand().equals("Eraser")) {
                 setTool(ERASER);
-            else if (e.getActionCommand().equals("-")) {
+                mode = 0;
+            }else if (e.getActionCommand().equals("-")) {
                 decreaseSize();
-                penSize--;
+                //penSize--;
             }
             else if (e.getActionCommand().equals("+")) {
                 increaseSize();
-                penSize++;
+                //penSize++;
             } else if (e.getActionCommand().equals("colorSelected"))
                 setColor();
             else if (e.getActionCommand().equals("Free Draw"))
