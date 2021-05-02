@@ -26,6 +26,7 @@ public class ToolBar extends JPanel{
     private int penSize;
     private ClickListener listener;
     private int mode = 1;
+    private int color = 1;
     //for tracking which buttons to gray out
     private JButton toolB;
     private JButton drawStyleB;
@@ -110,7 +111,7 @@ public class ToolBar extends JPanel{
             toolB.setEnabled(true);
             toolB = pencilB;
             toolB.setEnabled(false);
-            mode = 1;
+            mode = color;
             System.out.println("Using the pencil");
         }
         else if (tool == ERASER) {
@@ -123,15 +124,23 @@ public class ToolBar extends JPanel{
     }
 
     public void decreaseSize() {
-        size.setText((Integer.parseInt(size.getText()) - 1) + "");
-        System.out.println("Size decreased");
-        penSize--;
+        if (Integer.parseInt(size.getText()) <= 1) {
+            System.out.println("Brush is at minimum size!");
+        } else {
+            size.setText((Integer.parseInt(size.getText()) - 1) + "");
+            System.out.println("Size decreased");
+            penSize--;
+        }
     }
 
     public void increaseSize() {
-        size.setText((Integer.parseInt(size.getText()) + 1) + "");
-        System.out.println("Size increased" + size.getText());
-        penSize++;
+        if (Integer.parseInt(size.getText()) >= 10) {
+            System.out.println("Brush is at maximum size");
+        } else {
+            size.setText((Integer.parseInt(size.getText()) + 1) + "");
+            System.out.println("Size increased" + size.getText());
+            penSize++;
+        }
     }
     public int getPenSize(){
         return penSize;
@@ -141,14 +150,24 @@ public class ToolBar extends JPanel{
     public void setColor() {
         String outC = ((String) colorBox.getSelectedItem()).toLowerCase();
         System.out.println("Using " + ((String) colorBox.getSelectedItem()).toLowerCase());
-        if(outC.equals("red")){
-            mode = 2;
-        }else if(outC.equals("black"))
-            mode = 0;
+        if (mode != 0) {
+            if (outC.equals("red")) {
+                mode = 2;
+            } else if (outC.equals("black"))
+                mode = 0;
+            else if (outC.equals("green"))
+                mode = 3;
+            else if (outC.equals("blue"))
+                mode = 4;
+        }
+        if (outC.equals("red")) {
+            color = 2;
+        } else if (outC.equals("black"))
+            color = 0;
         else if (outC.equals("green"))
-            mode = 3;
-        else if(outC.equals("blue"))
-            mode = 4;
+            color = 3;
+        else if (outC.equals("blue"))
+            color = 4;
     }
 
     //method to handle setting draw method

@@ -87,25 +87,20 @@ public class Drawboard extends JPanel implements MouseListener, MouseMotionListe
         int mouseX = e.getX() / 6;
         int mouseY = e.getY() / 6;
         int m = mode;
-        if (size == 1) {
-                pixel[mouseX][mouseY] = m;
-            }else if (this.size == 2) {
-                    pixel[mouseX][mouseY] = m;
-                    pixel[mouseX + 1][mouseY] = m;
-                    pixel[mouseX + 1][mouseY + 1] = m;
-                    pixel[mouseX][mouseY + 1] = m;
-            }else if(this.size ==3){
-            pixel[mouseX][mouseY] = m;
-            pixel[mouseX + 1][mouseY] = m;
-            pixel[mouseX + 1][mouseY + 1] = m;
-            pixel[mouseX][mouseY + 1] = m;
-            pixel[mouseX-1][mouseY-1] = m;
-            pixel[mouseX][mouseY-1] = m;
-            pixel[mouseX+1][mouseY-1] = m;
-            pixel[mouseX-1][mouseY] = m;
-            pixel[mouseX-1][mouseY+1] = m;
+        if (this.size % 2 == 1) {
+            for (int i = mouseX - ((size - 1) / 2); i <= mouseX + ((size - 1) / 2); i++) {
+                for (int j = mouseY - ((size - 1) / 2); j <= mouseY + ((size - 1) / 2); j++) {
+                    pixel[i][j] = m;
+                }
+            }
+        } else {
+            for (int i = mouseX - (size / 2) + 1; i <= mouseX + (size / 2); i++) {
+                for (int j = mouseY - (size / 2) + 1; j <= mouseY + (size / 2); j++) {
+                    pixel[i][j] = m;
+                }
+            }
         }
-        }
+    }
 
 
 
@@ -116,23 +111,18 @@ public class Drawboard extends JPanel implements MouseListener, MouseMotionListe
         int mouseX = e.getX()/6;
         int mouseY = e.getY()/6;
         int m = mode;
-        if (size == 1) {
-            pixel[mouseX][mouseY] = m;
-        }else if (this.size == 2) {
-            pixel[mouseX][mouseY] = m;
-            pixel[mouseX + 1][mouseY] = m;
-            pixel[mouseX + 1][mouseY + 1] = m;
-            pixel[mouseX][mouseY + 1] = m;
-        }else if(this.size ==3){
-            pixel[mouseX][mouseY] = m;
-            pixel[mouseX + 1][mouseY] = m;
-            pixel[mouseX + 1][mouseY + 1] = m;
-            pixel[mouseX][mouseY + 1] = m;
-            pixel[mouseX-1][mouseY-1] = m;
-            pixel[mouseX][mouseY-1] = m;
-            pixel[mouseX+1][mouseY-1] = m;
-            pixel[mouseX-1][mouseY] = m;
-            pixel[mouseX-1][mouseY+1] = m;
+        if (this.size % 2 == 1) {
+            for (int i = mouseX - ((size - 1) / 2); i <= mouseX + ((size - 1) / 2); i++) {
+                for (int j = mouseY - ((size - 1) / 2); j <= mouseY + ((size - 1) / 2); j++) {
+                    pixel[i][j] = m;
+                }
+            }
+        } else {
+            for (int i = mouseX - (size / 2) + 1; i <= mouseX + (size / 2); i++) {
+                for (int j = mouseY - (size / 2) + 1; j <= mouseY + (size / 2); j++) {
+                    pixel[i][j] = m;
+                }
+            }
         }
     }
 
