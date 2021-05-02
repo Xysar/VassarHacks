@@ -30,7 +30,6 @@ public class Drawboard extends JPanel implements MouseListener, MouseMotionListe
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D) g;
             g.setColor(Color.WHITE);
             g.fillRect(0, 0, 600, 600);
             g.drawRect(0, 0, 600, 600);
@@ -71,7 +70,8 @@ public class Drawboard extends JPanel implements MouseListener, MouseMotionListe
 //                       }
                pastX = i*6;
                pastY = j*6;
-
+               g.setColor(Color.BLACK);
+               g.drawString("fuck",300,300);
            }
        }
 
