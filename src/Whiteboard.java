@@ -9,7 +9,6 @@ public class Whiteboard {
     Border loweredetched;
     JTextArea jTextArea1;
     Drawboard draw;
-   //JScrollPane Jscroll;
     int boardSize = 600;
 
     public Whiteboard(){
@@ -17,7 +16,8 @@ public class Whiteboard {
         this.loweredetched = BorderFactory.createEtchedBorder(1);
         this.pencilB = new JButton("Pencil");
         this.draw = new Drawboard();
-        this.jTextArea1 = new JTextArea(10,10);
+
+
         this.initialize();
     }
 
@@ -29,20 +29,17 @@ public class Whiteboard {
         this.board.setDefaultCloseOperation(3);
         this.board.getContentPane().setLayout(null);
         this.toolP.setBorder(BorderFactory.createTitledBorder(this.loweredetched, "Palette"));
-        this.toolP.add(jTextArea1);
         this.board.getContentPane().add(toolP);
         this.pencilB.setBounds(40, 50, 120, 25);
-        this.jTextArea1.setBounds(40, 400, 120, 25);
+
         this.board.setVisible(true);
         this.draw.setBounds(230, 10, boardSize, boardSize);
         this.board.getContentPane().add(this.draw);
-
-
-
         while (true) {
             draw.repaint();
             this.draw.setMode(this.toolP.getMode());
             this.draw.setSize(this.toolP.getPenSize());
+            this.draw.setText(this.toolP.getText());
         }
     }
 

@@ -17,11 +17,12 @@ public class ToolBar extends JPanel{
     private JLabel size;
     private JButton sizeUp;
     private JButton eraserB;
-
+    private JTextArea jTextArea;
     private JComboBox<String> colorBox;
     private JButton freeDrawB;
     private JButton lineB;
     private JButton clearB;
+    private JButton enterB;
 
     private int penSize;
     private ClickListener listener;
@@ -30,7 +31,7 @@ public class ToolBar extends JPanel{
     //for tracking which buttons to gray out
     private JButton toolB;
     private JButton drawStyleB;
-
+    private String text;
     private Whiteboard whiteboard;
 
     public ToolBar(Whiteboard whiteboard) {
@@ -41,6 +42,7 @@ public class ToolBar extends JPanel{
 
         //component initializations
         pencilB = new JButton("Pencil");
+        enterB = new JButton("Enter");
         sizeP = new JPanel();
         sizeL = new JLabel("Brush Size:", JLabel.CENTER);
         sizeDown = new JButton("-");
@@ -52,6 +54,9 @@ public class ToolBar extends JPanel{
         freeDrawB = new JButton("Free Draw");
         lineB = new JButton("Line");
         clearB = new JButton("Clear");
+        jTextArea = new JTextArea(10,10);
+
+        text = "";
 
         //panel setup
         this.setLayout(null);
@@ -90,6 +95,10 @@ public class ToolBar extends JPanel{
         lineB.addActionListener(listener);
         freeDrawB.setEnabled(false);
 
+        jTextArea.setBounds(40, 400, 120, 100);
+        enterB.setBounds(40,500,120,25);
+        enterB.addActionListener(listener);
+
         clearB.setBounds(40, 320, 120, 25);
         clearB.addActionListener(listener);
 
@@ -98,9 +107,11 @@ public class ToolBar extends JPanel{
         this.add(sizeP);
         this.add(eraserB);
         this.add(colorBox);
-        this.add(freeDrawB);
-        this.add(lineB);
+//        this.add(freeDrawB);
+//        this.add(lineB);
         this.add(clearB);
+        this.add(jTextArea);
+        this.add(enterB);
 
         toolB = pencilB;
         drawStyleB = freeDrawB;
@@ -154,7 +165,7 @@ public class ToolBar extends JPanel{
             if (outC.equals("red")) {
                 mode = 2;
             } else if (outC.equals("black"))
-                mode = 0;
+                mode = 1;
             else if (outC.equals("green"))
                 mode = 3;
             else if (outC.equals("blue"))
@@ -163,7 +174,7 @@ public class ToolBar extends JPanel{
         if (outC.equals("red")) {
             color = 2;
         } else if (outC.equals("black"))
-            color = 0;
+            color = 1;
         else if (outC.equals("green"))
             color = 3;
         else if (outC.equals("blue"))
@@ -171,24 +182,29 @@ public class ToolBar extends JPanel{
     }
 
     //method to handle setting draw method
-    public void setDrawMethod(int draw) {
-        if (draw == FREEDRAW) {
-            drawStyleB.setEnabled(true);
-            drawStyleB = freeDrawB;
-            drawStyleB.setEnabled(false);
-            System.out.println("Drawing style set to free draw");
-        }
-        else if (draw == LINEDRAW) {
-            drawStyleB.setEnabled(true);
-            drawStyleB = lineB;
-            drawStyleB.setEnabled(false);
-            System.out.println("Drawing style set to line drawing");
-        }
-    }
+//    public void setDrawMethod(int draw) {
+//        if (draw == FREEDRAW) {
+//            drawStyleB.setEnabled(true);
+//            drawStyleB = freeDrawB;
+//            drawStyleB.setEnabled(false);
+//            System.out.println("Drawing style set to free draw");
+//        }
+//        else if (draw == LINEDRAW) {
+//            drawStyleB.setEnabled(true);
+//            drawStyleB = lineB;
+//            drawStyleB.setEnabled(false);
+//            System.out.println("Drawing style set to line drawing");
+//        }
+//    }
 
     public int getMode(){
         return mode;
     }
+
+    public String getText(){
+        return text;
+    }
+
     private class ClickListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -205,12 +221,16 @@ public class ToolBar extends JPanel{
                 //penSize++;
             } else if (e.getActionCommand().equals("colorSelected"))
                 setColor();
-            else if (e.getActionCommand().equals("Free Draw"))
-                setDrawMethod(FREEDRAW);
-            else if (e.getActionCommand().equals("Line"))
-                setDrawMethod(LINEDRAW);
+            //else if (e.getActionCommand().equals("Free Draw"))
+                //setDrawMethod(FREEDRAW);
+            //else if (e.getActionCommand().equals("Line"))
+              //  setDrawMethod(LINEDRAW);
             else if (e.getActionCommand().equals("Clear"))
                 whiteboard.clear();
+            else if(e.getActionCommand().equals("Enter")){
+                text = jTextArea.getText();
+                System.out.println("test");
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 
 public class Drawboard extends JPanel implements MouseListener, MouseMotionListener {
     int color;
@@ -10,6 +11,7 @@ public class Drawboard extends JPanel implements MouseListener, MouseMotionListe
     int mode = 1;
     int pastX;
     int pastY;
+    String text;
 
     int pixel[][] = new int[100][100];
     int pWidth = 100;
@@ -19,6 +21,10 @@ public class Drawboard extends JPanel implements MouseListener, MouseMotionListe
     }
    public void setMode(int mode){
        this.mode= mode;
+    }
+
+    public void setText(String text){
+        this.text = text;
     }
     public Drawboard() {
         for(int i = 0; i<100;i++)
@@ -77,7 +83,7 @@ public class Drawboard extends JPanel implements MouseListener, MouseMotionListe
                pastX = i*6;
                pastY = j*6;
                g.setColor(Color.BLACK);
-               g.drawString("fuck",300,300);
+               g.drawString(text,250,300);
            }
        }
 
