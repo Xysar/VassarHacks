@@ -23,9 +23,15 @@ public class Drawboard extends JPanel implements MouseListener, MouseMotionListe
     public Drawboard() {
         for(int i = 0; i<100;i++)
             for(int j = 0; j<100;j++)
-                pixel[i][i] = 0;
+                pixel[i][j] = 0;
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
+    }
+
+    public void clear() {
+        for(int i = 0; i<100;i++)
+            for(int j = 0; j<100;j++)
+                pixel[i][j] = 0;
     }
 
     public void paintComponent(Graphics g) {

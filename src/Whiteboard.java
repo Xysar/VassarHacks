@@ -11,7 +11,7 @@ public class Whiteboard {
     int boardSize = 600;
 
     public Whiteboard(){
-        this.toolP = new ToolBar();
+        this.toolP = new ToolBar(this);
         this.loweredetched = BorderFactory.createEtchedBorder(1);
         this.pencilB = new JButton("Pencil");
         this.draw = new Drawboard();
@@ -39,6 +39,11 @@ public class Whiteboard {
             this.draw.setMode(this.toolP.getMode());
             this.draw.setSize(this.toolP.getPenSize());
         }
+    }
+
+    public void clear() {
+        draw.clear();
+        System.out.println("Cleared!");
     }
 
 
