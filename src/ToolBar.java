@@ -13,8 +13,10 @@ public class ToolBar extends JPanel{
     private JLabel size;
     private JButton sizeUp;
     private JButton eraserB;
-
+    private int penSize;
     private ClickListener listener;
+
+
 
     public ToolBar() {
         listener = new ClickListener();
@@ -23,8 +25,10 @@ public class ToolBar extends JPanel{
         sizeP = new JPanel();
         sizeDown = new JButton("-");
         size = new JLabel("1", JLabel.CENTER);
+        penSize = Integer.parseInt(size.getText());
         sizeUp = new JButton("+");
         eraserB = new JButton("Eraser");
+
 
         //this.setPreferredSize(new Dimension(200,600));
         this.setLayout((LayoutManager)null);
@@ -68,6 +72,9 @@ public class ToolBar extends JPanel{
         size.setText((Integer.parseInt(size.getText()) + 1) + "");
         System.out.println("Size increased");
     }
+    public int getPenSize(){
+        return penSize;
+    }
 
     private class ClickListener implements ActionListener {
         @Override
@@ -76,10 +83,14 @@ public class ToolBar extends JPanel{
                 setTool(PENCIL);
             else if (e.getActionCommand().equals("Eraser"))
                 setTool(ERASER);
-            else if (e.getActionCommand().equals("-"))
+            else if (e.getActionCommand().equals("-")) {
                 decreaseSize();
-            else if (e.getActionCommand().equals("+"))
+                penSize--;
+            }
+            else if (e.getActionCommand().equals("+")) {
                 increaseSize();
+                penSize++;
+            }
         }
     }
 }

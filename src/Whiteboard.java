@@ -4,11 +4,10 @@ import java.awt.*;
 
 public class Whiteboard {
     JFrame board;
-    JPanel toolP;
+    ToolBar toolP;
     JButton pencilB;
     Border loweredetched;
     Drawboard draw;
-    int color;
     int boardSize = 600;
 
     public Whiteboard(){
@@ -20,7 +19,7 @@ public class Whiteboard {
         this.initialize();
     }
 
-    public void initialize(){
+    public void initialize() {
         this.board = new JFrame();
 
         this.board.setResizable(false);
@@ -30,10 +29,13 @@ public class Whiteboard {
         this.board.getContentPane().setLayout(null);
         this.toolP.setBorder(BorderFactory.createTitledBorder(this.loweredetched, "Palette"));
         this.board.getContentPane().add(toolP);
-        this.pencilB.setBounds(40,50,120,25);
+        this.pencilB.setBounds(40, 50, 120, 25);
         this.board.setVisible(true);
-        this.draw.setBounds(230, 10,boardSize,boardSize);
+        this.draw.setBounds(230, 10, boardSize, boardSize);
         this.board.getContentPane().add(this.draw);
+        this.draw.setSize(this.toolP.getPenSize());
+        while (true)
+            draw.repaint();
     }
 
 
