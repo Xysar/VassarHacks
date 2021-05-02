@@ -100,9 +100,7 @@ public class Drawboard extends JPanel implements MouseListener, MouseMotionListe
             pixel[mouseX-1][mouseY+1] = m;
         }
         }
-
-
-
+        
     public void mouseMoved(MouseEvent e) {
     }
 
