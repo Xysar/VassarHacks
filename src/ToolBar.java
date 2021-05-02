@@ -21,17 +21,23 @@ public class ToolBar extends JPanel{
     private JComboBox<String> colorBox;
     private JButton freeDrawB;
     private JButton lineB;
+    private JButton clearB;
+
     private int penSize;
     private ClickListener listener;
     private int mode = 1;
+    private int color = 1;
     //for tracking which buttons to gray out
     private JButton toolB;
     private JButton drawStyleB;
 
-    public ToolBar() {
-        listener = new ClickListener();
+    private Whiteboard whiteboard;
 
-        colorNames = new String[] {"Red", "Green", "Blue", "Black"};
+    public ToolBar(Whiteboard whiteboard) {
+        listener = new ClickListener();
+        this.whiteboard = whiteboard;
+
+        colorNames = new String[] {"Black", "Red", "Green", "Blue"};
 
         //component initializations
         pencilB = new JButton("Pencil");
@@ -45,6 +51,7 @@ public class ToolBar extends JPanel{
         colorBox = new JComboBox<>(colorNames);
         freeDrawB = new JButton("Free Draw");
         lineB = new JButton("Line");
+        clearB = new JButton("Clear");
 
         //panel setup
         this.setLayout(null);
@@ -83,6 +90,9 @@ public class ToolBar extends JPanel{
         lineB.addActionListener(listener);
         freeDrawB.setEnabled(false);
 
+        clearB.setBounds(40, 320, 120, 25);
+        clearB.addActionListener(listener);
+
         //adding components
         this.add(pencilB);
         this.add(sizeP);
@@ -90,6 +100,7 @@ public class ToolBar extends JPanel{
         this.add(colorBox);
         this.add(freeDrawB);
         this.add(lineB);
+        this.add(clearB);
 
         toolB = pencilB;
         drawStyleB = freeDrawB;
@@ -100,26 +111,36 @@ public class ToolBar extends JPanel{
             toolB.setEnabled(true);
             toolB = pencilB;
             toolB.setEnabled(false);
+            mode = color;
             System.out.println("Using the pencil");
         }
         else if (tool == ERASER) {
             toolB.setEnabled(true);
             toolB = eraserB;
             toolB.setEnabled(false);
+            mode = 0;
             System.out.println("Using the eraser");
         }
     }
 
     public void decreaseSize() {
-        size.setText((Integer.parseInt(size.getText()) - 1) + "");
-        System.out.println("Size decreased");
-        penSize--;
+        if (Integer.parseInt(size.getText()) <= 1) {
+            System.out.println("Brush is at minimum size!");
+        } else {
+            size.setText((Integer.parseInt(size.getText()) - 1) + "");
+            System.out.println("Size decreased");
+            penSize--;
+        }
     }
 
     public void increaseSize() {
-        size.setText((Integer.parseInt(size.getText()) + 1) + "");
-        System.out.println("Size increased" + size.getText());
-        penSize++;
+        if (Integer.parseInt(size.getText()) >= 10) {
+            System.out.println("Brush is at maximum size");
+        } else {
+            size.setText((Integer.parseInt(size.getText()) + 1) + "");
+            System.out.println("Size increased" + size.getText());
+            penSize++;
+        }
     }
     public int getPenSize(){
         return penSize;
@@ -129,14 +150,24 @@ public class ToolBar extends JPanel{
     public void setColor() {
         String outC = ((String) colorBox.getSelectedItem()).toLowerCase();
         System.out.println("Using " + ((String) colorBox.getSelectedItem()).toLowerCase());
-        if(outC.equals("red")){
-            mode = 2;
-        }else if(outC.equals("black"))
-            mode = 0;
+        if (mode != 0) {
+            if (outC.equals("red")) {
+                mode = 2;
+            } else if (outC.equals("black"))
+                mode = 0;
+            else if (outC.equals("green"))
+                mode = 3;
+            else if (outC.equals("blue"))
+                mode = 4;
+        }
+        if (outC.equals("red")) {
+            color = 2;
+        } else if (outC.equals("black"))
+            color = 0;
         else if (outC.equals("green"))
-            mode = 3;
-        else if(outC.equals("blue"))
-            mode = 4;
+            color = 3;
+        else if (outC.equals("blue"))
+            color = 4;
     }
 
     //method to handle setting draw method
@@ -163,10 +194,8 @@ public class ToolBar extends JPanel{
         public void actionPerformed(ActionEvent e) {
             if (e.getActionCommand().equals("Pencil")) {
                 setTool(PENCIL);
-                mode = 1;
             }else if (e.getActionCommand().equals("Eraser")) {
                 setTool(ERASER);
-                mode = 0;
             }else if (e.getActionCommand().equals("-")) {
                 decreaseSize();
                 //penSize--;
@@ -180,6 +209,8 @@ public class ToolBar extends JPanel{
                 setDrawMethod(FREEDRAW);
             else if (e.getActionCommand().equals("Line"))
                 setDrawMethod(LINEDRAW);
+            else if (e.getActionCommand().equals("Clear"))
+                whiteboard.clear();
         }
     }
 }
