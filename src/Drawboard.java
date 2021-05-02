@@ -91,13 +91,17 @@ public class Drawboard extends JPanel implements MouseListener, MouseMotionListe
         if (this.size % 2 == 1) {
             for (int i = mouseX - ((size - 1) / 2); i <= mouseX + ((size - 1) / 2); i++) {
                 for (int j = mouseY - ((size - 1) / 2); j <= mouseY + ((size - 1) / 2); j++) {
-                    pixel[i][j] = m;
+                    try {
+                        pixel[i][j] = m;
+                    } catch (IndexOutOfBoundsException b) {}
                 }
             }
         } else {
             for (int i = mouseX - (size / 2) + 1; i <= mouseX + (size / 2); i++) {
                 for (int j = mouseY - (size / 2) + 1; j <= mouseY + (size / 2); j++) {
-                    pixel[i][j] = m;
+                    try {
+                        pixel[i][j] = m;
+                    } catch (IndexOutOfBoundsException b) {}
                 }
             }
         }
@@ -113,13 +117,17 @@ public class Drawboard extends JPanel implements MouseListener, MouseMotionListe
         if (this.size % 2 == 1) {
             for (int i = mouseX - ((size - 1) / 2); i <= mouseX + ((size - 1) / 2); i++) {
                 for (int j = mouseY - ((size - 1) / 2); j <= mouseY + ((size - 1) / 2); j++) {
+                    try {
                     pixel[i][j] = m;
+                    } catch (IndexOutOfBoundsException b) {}
                 }
             }
         } else {
             for (int i = mouseX - (size / 2) + 1; i <= mouseX + (size / 2); i++) {
                 for (int j = mouseY - (size / 2) + 1; j <= mouseY + (size / 2); j++) {
+                    try {
                     pixel[i][j] = m;
+                    } catch (IndexOutOfBoundsException b) {}
                 }
             }
         }
