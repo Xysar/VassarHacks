@@ -109,8 +109,24 @@ public class Drawboard extends JPanel implements MouseListener, MouseMotionListe
     public void mouseClicked(MouseEvent e) {
         int mouseX = e.getX()/6;
         int mouseY = e.getY()/6;
-        if(mode == 1) {
-            pixel[mouseX][mouseY] = 1;
+        int m = mode;
+        if (size == 1) {
+            pixel[mouseX][mouseY] = m;
+        }else if (this.size == 2) {
+            pixel[mouseX][mouseY] = m;
+            pixel[mouseX + 1][mouseY] = m;
+            pixel[mouseX + 1][mouseY + 1] = m;
+            pixel[mouseX][mouseY + 1] = m;
+        }else if(this.size ==3){
+            pixel[mouseX][mouseY] = m;
+            pixel[mouseX + 1][mouseY] = m;
+            pixel[mouseX + 1][mouseY + 1] = m;
+            pixel[mouseX][mouseY + 1] = m;
+            pixel[mouseX-1][mouseY-1] = m;
+            pixel[mouseX][mouseY-1] = m;
+            pixel[mouseX+1][mouseY-1] = m;
+            pixel[mouseX-1][mouseY] = m;
+            pixel[mouseX-1][mouseY+1] = m;
         }
     }
 
