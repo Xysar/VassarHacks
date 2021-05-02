@@ -56,7 +56,7 @@ public class ToolBar extends JPanel{
 //        lineB = new JButton("Line");
         clearB = new JButton("Clear");
         jTextArea = new JTextArea(10,10);
-        save = new JButton("Save as .jpg");
+        save = new JButton("Save as .png");
 
         text = "";
 

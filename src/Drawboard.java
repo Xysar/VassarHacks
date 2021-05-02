@@ -52,11 +52,11 @@ public class Drawboard extends JPanel implements MouseListener, MouseMotionListe
         try {
             String home = System.getProperty("user.home");
             String filePath = home + File.separator + "Downloads" + File.separator + "painting";
-            File file = new File(filePath + ".jpg");
+            File file = new File(filePath + ".png");
             for (int i = 1; file.exists(); i++) {
-                file = new File(filePath + i + ".jpg");
+                file = new File(filePath + i + ".png");
             }
-            ImageIO.write(image, "jpg", file);
+            ImageIO.write(image, "png", file);
         } catch (IOException exp) {
             exp.printStackTrace();
         }
